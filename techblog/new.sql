@@ -19,7 +19,7 @@
 -- Table structure for table `posts`
 --
 
-DROP TABLE IF EXISTS `posts`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `posts` (
@@ -29,12 +29,12 @@ CREATE TABLE `posts` (
   `category` varchar(255) DEFAULT NULL,
   `descript` varchar(255) DEFAULT NULL,
   `post_body` text NOT NULL,
-  `post_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `post_created` datetime DEFAULT NULL,
   `post_photo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`post_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,12 +60,12 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
   `user_fullname` varchar(255) DEFAULT NULL,
-  `user_birthday` date DEFAULT NULL,
+  `user_birthday` datetime DEFAULT NULL,
   `user_address` varchar(255) DEFAULT NULL,
   `user_phone` varchar(255) DEFAULT NULL,
   `user_descript` text,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
