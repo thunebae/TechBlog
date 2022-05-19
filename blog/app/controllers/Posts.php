@@ -84,6 +84,49 @@ class Posts extends Controller
                 $data['bodyError'] = 'The body of a post cannot be empty';
             }
 
+            // Get file form post
+            $post_image = $_FILES['post_image'];
+            $post_image_name = rand() ."_" . $post_image['name'];
+            $post_image_tmp_name = $post_image['tmp_name'];
+            $post_image_size = $post_image['size'];
+            $post_image_error = $post_image['error'];
+            $post_image_type = $post_image['type'];
+
+            $post_image_ext = explode('.', $post_image_name);
+            $post_image_ext = strtolower(end($post_image_ext));
+
+            $allowed = array('jpg', 'jpeg', 'png');
+
+            try 
+            {
+                $mime_type = $_FILES["post_image"]["type"];
+                if (!in_array($mime_type, ["image/jpeg", "image/png", "image/gif"]))
+                    die("Hack detected");
+            
+            } catch(Exception $e) {
+                $error = $e->getMessage();
+                die($error);
+            } 
+
+            if(in_array($post_image_ext, $allowed)) {
+                if($post_image_error === 0) {
+                    if($post_image_size <= 2097152) {
+                        $post_image_destination = BLOG_ROOT . "\\uploads\\post\\" . $post_image_name;
+                        move_uploaded_file($post_image_tmp_name, $post_image_destination);
+                        $data['post_image'] = "..\\..\\app\\uploads\\post\\" . $post_image_name;
+                    } else {
+                        $data['bodyError'] = 'The image size is too big';
+                    }
+                } else {
+                    $data['bodyError'] = 'There was an error uploading the image';
+                }
+            } else {
+                $data['bodyError'] = 'The image type is not allowed';
+            }
+
+
+
+
             if (empty($data['titleError']) && empty($data['categoryError']) && empty($data['descriptError']) && empty($data['bodyError'])) {
                 if ($this->postModel->addPost($data)) {
                     header("Location: " . URL_ROOT . "/posts");

@@ -13,6 +13,8 @@
     <img src="<?php echo URL_ROOT; ?>/img/banner_home.jpg" class="img-fluid" alt="">
 </div><!-- end page-title -->
 
+
+
 <section class="section">
     <div class="container">
         <div class="row">
@@ -22,29 +24,15 @@
                                 <h2 class="widget-title">Popular Posts</h2>
                                 <div class="blog-list-widget">
                                     <div class="list-group">
-                                        <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <?php foreach($data['popular_posts'] as $popular_posts): ?>
+                                        <a href="<?php echo URL_ROOT . '/pages/post/' . $popular_posts->post_id; ?>" class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="w-100 justify-content-between">
-                                                <img src="upload/tech_blog_08.jpg" alt="" class="img-fluid float-left">
-                                                <h5 class="mb-1">5 Beautiful buildings you need..</h5>
-                                                <small>12 Jan, 2016</small>
+                                                <img src="<?php echo URL_ROOT; ?>/img/banner.jpg"  alt="" class="img-fluid float-left">
+                                                <h5 class="mb-1"><?php echo $popular_posts->post_title; ?></h5>
+                                                <small><?php echo date('F j Y h:m', strtotime($popular_posts->post_created)) ?></small>
                                             </div>
                                         </a>
-
-                                        <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                            <div class="w-100 justify-content-between">
-                                                <img src="upload/tech_blog_01.jpg" alt="" class="img-fluid float-left">
-                                                <h5 class="mb-1">Let's make an introduction for..</h5>
-                                                <small>11 Jan, 2016</small>
-                                            </div>
-                                        </a>
-
-                                        <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                            <div class="w-100 last-item justify-content-between">
-                                                <img src="upload/tech_blog_03.jpg" alt="" class="img-fluid float-left">
-                                                <h5 class="mb-1">Did you see the most beautiful..</h5>
-                                                <small>07 Jan, 2016</small>
-                                            </div>
-                                        </a>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div><!-- end blog-list -->
                             </div><!-- end widget -->
@@ -59,7 +47,7 @@
                             <div class="col-md-6">
                                 <div class="blog-box">
                                     <div class="post-media">
-                                        <a href="tech-single.html" title="">
+                                        <a href="<?php echo URL_ROOT . '/pages/post/' . $page_view->post_id; ?>" title="">
                                             <img src="<?php echo URL_ROOT; ?>/img/banner.jpg" alt="" class="img-fluid">
                                             <div class="hovereffect">
                                                 <span></span>
@@ -67,12 +55,12 @@
                                         </a>
                                     </div><!-- end media -->
                                     <div class="blog-meta big-meta">
-                                        <span class="color-orange"><a href="tech-category-01.html" title=""><?php echo $page_view->post_category; ?> </a></span>
-                                        <h4><a href="tech-single.html" title=""><?php echo $page_view->post_title; ?> </a></h4>
+                                        <span class="color-orange"><a title=""><?php echo $page_view->post_category; ?> </a></span>
+                                        <h4><a href="<?php echo URL_ROOT . '/pages/post/' . $page_view->post_id; ?>" title=""><?php echo $page_view->post_title; ?> </a></h4>
                                         <p><?php echo $page_view->post_descript; ?></p>
-                                        <small><a href="tech-single.html" title=""><?php echo date('F Y h:m', strtotime($page_view->post_created)) ?></a></small>
-                                        <small><a href="tech-author.html" title="">by <?php echo $page_view->user_name; ?></a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 2887</a></small>
+                                        <small><a title=""><?php echo date('F j Y h:m', strtotime($page_view->post_created)) ?></a></small>
+                                        <small><a title="">by <?php echo $page_view->user_name; ?></a></small>
+                                        <small><a title=""><i class="fa fa-eye"></i> <?php echo $page_view->views; ?></a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end blog-box -->
                             </div><!-- end col -->
@@ -116,8 +104,6 @@
         </div>
     </div>
 </section>
-
-
 
 <?php
    require BLOG_ROOT . '/views/includes/footer.php';

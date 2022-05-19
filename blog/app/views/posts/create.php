@@ -10,7 +10,7 @@
         Create new post
     </h1>
 
-    <form action="<?php echo URL_ROOT; ?>/posts/create" method="POST">
+    <form action="<?php echo URL_ROOT; ?>/posts/create" method="POST" enctype="multipart/form-data">
         <!--Title-->
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -51,6 +51,10 @@
                 <?php echo $data['bodyError']; ?>
             </span>
         </div>
+            <div class="col-md-12 flex">
+                <input type="file" class="form-control"  name="post_image">
+            </div>
+        <br>
 
         <button class="btn green" name="submit" type="submit">Submit</button>    
     </form>

@@ -52,6 +52,12 @@
                     <?php echo $data['bodyError']; ?>
                 </span>
             </div>
+            <div class="row mt-3">
+                <div class="col-md-12 flex">
+                    <input type="file" class="form-control"  name="file">
+                </div>
+            </div>
+            <br>
 
 
             <button class="btn green" name="submit" type="submit">Submit</button>
